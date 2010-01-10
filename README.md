@@ -1,6 +1,12 @@
 ## ElementStacks for jQuery ##
 
+ElementStacks stacks elements/images on top of each other with a funky transition.
+
 jQuery version of [ElementStacks](http://mootools.net/forge/p/elementstack) by [Oskar Krawczyk](http://nouincolor.com).
+
+### Demo ###
+
+[http://www.jsfiddle.net/marcofucci/rRtAq/](http://www.jsfiddle.net/marcofucci/rRtAq/)
 
 ### Dependencies ###
 
@@ -18,3 +24,7 @@ jQuery version of [ElementStacks](http://mootools.net/forge/p/elementstack) by [
 * **delay**: delay between the animation of the elements. Default **40**.
 * **duration**: duration of the animation for each element. Default **900**.
 * **transition**: the name of the easing effect that you want to use. Default **swing**.
+
+### License ###
+
+ElementStacks is licensed under [MIT](http://www.opensource.org/licenses/mit-license.php).

@@ -7,6 +7,8 @@
  *
  * Copyright (c) 2010 Marco Fucci
  * http://www.marcofucci.com
+ * 
+ * Requires: jQuery 1.2.3+
  *
  * Licensed under MIT
  * http://www.opensource.org/licenses/mit-license.php
@@ -16,7 +18,7 @@
         var opts = $.extend({}, $.fn.elementStacks.defaults, options);
 
         return this.each(function() {
-            var pos, collapsed = false, stackItems = $(opts.items_selector, this).css({'z-index': 10});
+            var pos, collapsed = false, stackItems = $(opts.itemsSelector, this).css({'z-index': 10});
 
             stackItems
                 .each(function(index, img) {
@@ -49,7 +51,7 @@
     };
     
     $.fn.elementStacks.defaults = {
-        'items_selector': 'img',
+        'itemsSelector': 'img',
         'rotationDeg': 20,
         'delay': 40,
         'duration': 900,

@@ -6,20 +6,34 @@
  * by Oskar Krawczyk (http://nouincolor.com).
  *
  * Copyright (c) 2010 Marco Fucci
- * http://www.marcofucci.com
- * 
- * Requires: jQuery 1.2.3+
+ * http://www.marcofucci.com/tumblelog/15/mar/2010/elementstack_v1-1/
  *
  * Licensed under MIT
  * http://www.opensource.org/licenses/mit-license.php
+ *
+ * Launch  : January 2010
+ * Version : 1.1
+ * Released: 10th Jan, 2010
  */
+
 (function($) {
+    var defaultStuckWithItemFunc = function(wrapper, opts) {
+        var selector = [opts.itemsSelector, ":"];
+        if (opts.stuckWithItem == 'first' || opts.stuckWithItem == 'last') {
+            selector.push(opts.stuckWithItem);
+        } else {
+            selector.push("eq(", opts.stuckWithItem, ")");
+        }
+        return $(selector.join(""), wrapper)
+    };
+    
     $.fn.elementStacks = function(options) {
         var opts = $.extend({}, $.fn.elementStacks.defaults, options);
 
         return this.each(function() {
             var pos, collapsed = false, stackItems = $(opts.itemsSelector, this).css({'z-index': 10});
 
+            var $that = this;
             stackItems
                 .each(function(index, img) {
                     $(img)
@@ -35,7 +49,13 @@
                     };
                     
                     collapsed = !collapsed;
-                    var target = (collapsed) ? $this.css({'z-index': 100}) : null;
+                    var target = (collapsed) ?
+                        (
+                            (opts.stuckWithItem != null) ?
+                                $((jQuery.isFunction(opts.stuckWithItem) ?
+                                     opts.stuckWithItem : defaultStuckWithItemFunc
+                                ).call(this, $that, opts)) : $this
+                        ).css({'z-index': 100}) : null;
                     $this.one('stackfinished', function() {
                         if (!target) {
                             stackItems.css({'z-index': 10});
@@ -47,6 +67,10 @@
                         }, opts.delay * index);
                     });
                 });
+            
+            if (opts.initialCollapse) {
+                $(opts.itemsSelector + ":eq(0)", $that).click();
+            }
         });
     };
     
@@ -55,7 +79,9 @@
         'rotationDeg': 20,
         'delay': 40,
         'duration': 900,
-        'transaction': 'swing'
+        'transaction': 'swing',
+        'stuckWithItem': null, //null, ''first', last', function or index of the stuck element (0-based)
+        'initialCollapse': false //true if you want the initial state to be collapsed
     };
     
     $.fn.elementStacks.random = function(min, max) {

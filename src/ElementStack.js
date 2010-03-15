@@ -80,7 +80,7 @@
         'delay': 40,
         'duration': 900,
         'transaction': 'swing',
-        'stuckWithItem': null, //null, ''first', last', function or index of the stuck element (0-based)
+        'stuckWithItem': null, //null, 'first', last', function or index of the stuck element (0-based)
         'initialCollapse': false //true if you want the initial state to be collapsed
     };
     
